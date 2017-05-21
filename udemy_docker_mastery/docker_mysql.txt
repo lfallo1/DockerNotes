@@ -1,0 +1,5 @@
+https://hub.docker.com/_/mysql/
+docker run --publish 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql
+
+# -e options specifies environment variables (--environment)
+# alternatively can use MYSQL_RANDOM_ROOT_PASSWORD=yes, which will spit out the random root pwd in the logs.

@@ -1,0 +1,9 @@
+Dockerfiles- recipe for creating docker images. When you pull down an image, the instructions for the behavior of the image are defined by a Dockerfile.
+
+Official Def:
+Dockerfile will define what goes on in the environment inside your container. Access to resources like networking interfaces and disk drives is virtualized inside this environment, which is isolated from the rest of your system, so you have to map ports to the outside world, and be specific about what files you want to “copy in” to that environment. However, after doing that, you can expect that the build of your app defined in this Dockerfile will behave exactly the same wherever it runs.
+
+>docker image build -t <tag_name> <path> [for the path, if already in dir of dockerfile, just use a dot, "."]
+
+---RUN vs CMD---
+RUN executes command(s) in a new layer and creates a new image. E.g., it is often used for installing software packages. CMD sets default command and/or parameters, which can be overwritten from command line when docker container runs

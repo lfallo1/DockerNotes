@@ -1,0 +1,16 @@
+Volumes:
+-specified with VOLUME in DockerFile or inline with the docker container run cmd using -v option
+-example of creating new Volume with docker container run options.
+    docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql
+    "-v myslq-db:/var/lib/mysql" => creates a named volume ["mysql-db"] located at /var/lib/mysql that will persist beyond life of container
+    **One use case could be if you don't want to keep re-creating a database during dev.
+
+
+Bind Mounting:
+-mapping of host files/dirs to container files/dirs
+-can't use in Dockerfile. must be at "container run"
+    i.e., run -v /Users/lfallon/stuff:/path/container (mac/linux)
+          run -v //c/Users/lfallon/stuff:/path/container (windows)
+
+# create new container from "nginx-custom" image, and map local drive to container drive
+docker container run -d --name nginx -p 80:80 -v "C:\Users\lfallon\mydocs\misc_study_ ... mastery\dockerfile-sample-2":/usr/share/nginx/html nginx-custom

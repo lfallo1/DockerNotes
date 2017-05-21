@@ -1,0 +1,16 @@
+# create new virtual network. create two containers from elasticsearch:2 image.
+# use --net-alias search when creating them to an additional DNS name to respond to
+# create alpine container on same network, & run nslookup search to see the two containers list for the same DNS name
+# create centos container on same network & use  curl -s search:9200 until you see both elasticsearch server names
+
+>docker network create elasticsearch_network
+>docker container run --net-alias search -d --name elastic1 --network elasticsearch_network  elasticsearch:2
+>docker container run --net-alias search -d --name elastic2 --network elasticsearch_network  elasticsearch:2
+
+#creates a temp container using alpine image. perform nslookup on DNS entry "search" that will return thee both elastic1 & elastic2 containers
+>docker container run -it --rm --network elasticsearch_network alpine sh
+>nslookup search
+
+#create centos container and perform request against "search" DNS entry on port 9200
+>docker container run -it --rm --network elasticsearch_network centos bash
+>curl -s search:9200

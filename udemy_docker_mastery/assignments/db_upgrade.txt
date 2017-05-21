@@ -1,0 +1,15 @@
+# create container running postgres 9.6.1 & another 9.6.2.
+# the -p is unnecessary, but wanted to see if i could connect outside of docker which i can (see below)
+docker container run -d --name psql -p 5433:5432 -v psql:/var/lib/postgresql/data postgres:9.6.1
+docker container run -d --name psql2 -v psql:/var/lib/postgresql/data postgres:9.6.1
+
+- View logs with docker logs -f psql, to see when psql is created & to see the startup/shutdown commands
+- Bash into container and start psql using the cmd from logs and as user posrgres (i.e., su -postgres ...)
+- If forwarded port to docker's 5432, you can login outside of container using 0.0.0.0:<<PORT>> as postgres
+
+postgres specific:
+psql -U postgres or [if already have a db] psql -U postgres <<DbName>>
+
+\list - show all databases
+\q - quit
+\c <<dbname>> - reconnect to a different database

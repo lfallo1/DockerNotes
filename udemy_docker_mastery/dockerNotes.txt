@@ -1,0 +1,22 @@
+Image vs. Container
+  An image is a lightweight, stand-alone, executable package that includes everything needed to run a piece of software, including the code, a runtime, libraries, environment variables, and config files.
+
+  A container is a runtime instance of an image – what the image becomes in memory when actually executed. It runs completely isolated from the host environment by default, only accessing host files and ports if configured to do so.
+
+  Containers run apps natively on the host machine’s kernel. They have better performance characteristics than virtual machines that only get virtual access to host resources through a hypervisor. Containers can get native access, each one running in a discrete process, taking no more memory than any other executable.
+
+  (You can see all your images with docker images whereas you can see your running containers with docker ps (and you can see all containers with docker ps -a).)
+
+
+Container vs VirtualMachine
+  Containers: a) just processes, b) limited to what resources they can access, c) exit when process stops
+  *Restricted process running inside the host operating system
+  *Process running directly on the host machine, interacting natively with kernel
+
+
+What happens in "docker container run":
+1) look for image locally / download from image repo [into image cache] if not found
+2) create new container based on that image & prepares to start
+3) gives it a virtual IP on private network inside Docker engine
+4) opens up port 80 on host and forwards to port 80 in container
+5) starts container using CMD in image docker file

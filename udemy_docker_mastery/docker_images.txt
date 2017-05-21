@@ -1,0 +1,17 @@
+Outline:
+  What is in an image (what isn't)?
+  Using Docker Hub Registry
+  Managing our local image cache
+  Building Own images
+
+-Made up of file system changes and metadata
+-Images are "layers" of changes [can view through 'docker image history <image>']. When you download/upload images, only the changes are applied [uses a SHA for comparisions]
+-Containers are built on top of images. any changes / additions to the image is known as a "Copy on Write", in which the changed file is copied to the container.  So the container consists of the image + any changes
+
+----What is an image?----
+*App binaries & dependencies. Metadata about image data & how to run the image
+*Not a complete OS (only has binaries your app needs). No kernel, kernel modules (e.g. drivers) host provides kernel
+*can be small as one file, or as big as Ubuntu distro with apt, Apache, PHP, etc.
+
+----Using Docker Registry Hub----
+hub.docker.com

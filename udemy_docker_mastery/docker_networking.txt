@@ -1,0 +1,40 @@
+docker container run -p HOST:CONTAINER
+docker container port <container>
+docker network ls: show networks
+docker network inspect: inspect a network
+docker network create --driver <network_name>: create a network
+docker network connect|disconnect
+
+#create network
+
+#create container on specific network
+docker container run -d --name webhost_v3 --network my_app_network nginx
+
+----Docker Network Defaults----
+  each container connected to a private virtual network "bridge", a DIFFERENT network than your host machine
+  **Bridge is Default Docker virtual network which is NAT'ed behind host IP
+  each virtual network routes through NAT firewall on host IP
+  all containers on a virtual network can talk to each other without -p, which prevents from exposing to outside world
+  Best practice is to create a new virtual network for each app
+    -network "my_web_app" for mysql & php/apache containers
+    -network "my_api" for mongo & nodejs containers
+
+#show ip of container, where NetworkSettings.IPAddress is the json prop in the container's config file
+docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost
+
+-By default- each container is put on "bridge" network. By specifying -p it instructs the network interface to forward any incoming traffic to the container. if no -p is specified, then the container will not be reachable
+
+-You can override the default private virtual network, and create your own.
+
+-apps in same container can talk to each other without exposing the port [ala., without using -p]
+
+
+----Docker Network: DNS----
+"DNS resolution ust works" => Automatically setup for containers running on same virtual network. For example, if containers named nginx_v1 & nginx_v2 running on same network "my_network", you can access the container [from another container on same network] by simply using its name.
+**this is important as you do NOT need to rely on container ip addresses, but instead just use container names
+**the DEFAULT network does not have DNS server built-in by default. Workaround is --link option that provides link between containers. Better options is to just create own network
+
+Summary:
+- containers shouldn't rely on ip addresses
+- DNS for friendly names is built-in if you use custom networks
+- use custom networks!

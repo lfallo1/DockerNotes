@@ -1,0 +1,5 @@
+#create centos container in interactive mode, and test curl. destroy container immediately afterwards
+docker container run -it --rm centos:7 yum update curl && curl --version
+
+#create container, run in interactive mode with original cmd of "bash". destroy container on exit
+docker container run -it --rm ubuntu:14.04 bash

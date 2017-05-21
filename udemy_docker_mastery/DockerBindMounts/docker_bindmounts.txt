@@ -1,0 +1,7 @@
+Docker Bind Mounts
+-maps a host file or dir to a container file or dir
+-basically just two locations pointing to same file(s)
+-again, skips UFS, and host files overwrite any in container
+-can't use in Dockerfile, must be at container run
+    i.e., docker container run -v <<host_path>>:<<container_path>> (mac/linux)
+          docker container run -v /Users/lfallon/stuff:/path/container (mac/linux)

@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  tomcat:
+    image: wongnai/tomcat-nginx
+    ports:
+      - "8080:8080"
+      - "80:80"
+    volumes:
+      - ./webapp:/usr/local/tomcat/webapps
+    command: bash -c "mkdir /usr/share/nginx/html/nfldraft_export"
+  postgres-java:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "5433:5432"

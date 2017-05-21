@@ -1,0 +1,9 @@
+version: '3.1'  # if no version is specificed then v1 is assumed. Recommend v2 minimum
+
+services:  # containers. same as docker run
+  nginx: # a friendly name. this is also DNS name inside network
+    image: nginx
+    volumes:
+      - .:/usr/share/nginx/html
+    ports:
+      - 8080:80

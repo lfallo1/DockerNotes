@@ -1,0 +1,14 @@
+Docker Image Tags
+- Images don't technically have names. Really 3 pieces of info
+    Repository: format => name/organization
+    Tag: pointer to a specific image commit [i.e., 5, 2.14, latest]
+
+# add a new tag locally
+>docker image tag <SOURCE_IMAGE>[:TAG] <TARGET_IMAGE>[:TAG]
+
+# push an image to the repo
+>docker login
+>docker image push <SOURCE_IMAGE>[:TAG]
+
+# optional, but will clear your auth keys from the machine
+>docker logout

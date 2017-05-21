@@ -1,0 +1,60 @@
+# alpine example
+docker pull alpine
+winpty docker container run -it alpine bash
+
+docker container run -it: start new container interactively
+docker container exec -it: run addl comman in existing container
+i.e., docker container exec -it 7e bash
+
+
+#download image and start container. Detach specifies that container will run in bg.
+docker container run --publish <<localport>>:<<containerPort>> --detach --name <<name>> <<imageName>>
+examples:
+  docker container run --publish 9000:80 --detach nginx (downloads nginx docker image and starts container with image available by accessing localhost:9000 on host)
+  docker container run --detach --name mongo mongo
+  docker container run --publish 80:80 --detach --name nginx nginx
+
+# some docker container run options
+  -p => --publish, which publishes ports. usage is "-p HOST:CONTAINER"
+  -d => --detach, wil run container in background and print the container's id
+
+
+# list containers / images... -a option shows all
+docker container ls
+docker image ls
+
+#stop container
+docker container stop <<container_id>>
+
+#delete container / image
+docker rm <<container_id>>
+docker rmi <<image_id>>
+
+#show last 200 logs of container named webhost
+docker logs --tail 200 webhost
+
+#list processes running inside a container
+docker top <<container name>>
+
+# config / inspect commands
+docker container top <<container>>: process list in one container. -f option shows live logs. -t specifies tail
+docker container inspect <<container>>: details of one container config
+docker container stats <<container>>: live performance stats for all containers
+
+
+#terminal access of running container. winpty if on windows machine
+winpty docker container exec -it <<containerid>> bash
+
+#start container and immediately login to terminal. note that "bash" changes the default command used in the docker startup. so when you exit the container's terminal, the container will stop running
+docker container run -it --name <<name>> <<image>>
+
+#expose port
+docker container run -p
+
+#show ports open for container
+docker container port <container>
+
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
